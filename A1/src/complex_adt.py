@@ -33,6 +33,4 @@ class ComplexT():
             elif self.y < 0:
                 return - math.pi / 2
             else:
-                return "undefined"
-
-            
+                raise Exception("undefined answer")
