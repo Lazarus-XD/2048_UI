@@ -41,6 +41,9 @@ class ComplexT():
     def equal(self, complex_num):
         return self.real() == complex_num.real() and self.imag() == complex_num.imag()
 
+    def __eq__(self, other):
+        return self.equal(other)
+
     def conj(self):
         return ComplexT(self.__x, - self.__y)
 
@@ -75,4 +78,3 @@ class ComplexT():
         x = math.sqrt(r) * math.cos(theta / 2)
         y = math.sqrt(r) * math.sin(theta / 2)
         return ComplexT(x, y)
-    
