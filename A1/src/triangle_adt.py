@@ -79,6 +79,8 @@ class TriangleT():
             return TriType.scalene
 
 ## @brief TriType class is an enumeration of the different types of triangle
+#  @details The four different types of triangle are: equilateral, isosceles,
+#  scalene and right angled triangle
 class TriType(Enum):
 
     ## enum value equilat

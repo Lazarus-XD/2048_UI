@@ -89,7 +89,7 @@ class ComplexT():
     #  @return ComplexT which results from the multiplication
     def mult(self, complex_num):
         x = self.__x * complex_num.real() - self.__y * complex_num.imag()
-        y = self.__x * complex_num.imag() - self.__y * complex_num.real()
+        y = self.__x * complex_num.imag() + self.__y * complex_num.real()
         return ComplexT(x, y)
 
     ## @brief Gets the reciprocal of the complex number
