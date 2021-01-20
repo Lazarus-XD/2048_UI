@@ -1,7 +1,7 @@
 ## @file triangle_adt.py
 #  @author Rizwan Ahsan
 #  @brief Contains a class for working with triangles
-#  @date 01/19/2021
+#  @date 01/20/2021
 
 import math
 from enum import Enum, auto

@@ -1,7 +1,7 @@
 ## @file complex_adt.py
 #  @author Rizwan Ahsan
 #  @brief Contains a class for working with complex numbers
-#  @date 01/19/2021
+#  @date 01/20/2021
 
 import math
 
