@@ -11,21 +11,15 @@ from enum import Enum, auto
 class TriangleT():
 
     ## @brief Contructor for TriangleT class
-    #  @details Creates a triangle based on the provided arguments
+    #  @details Creates a triangle based on the provided arguments. Assumed the sides are
+    #  of type integer and greater than 0
     #  @param x Integer representing a side of the triangle
     #  @param y Integer representing a side of the triangle
     #  @param z Integer representing a side of the triangle
-    #  @throws Exception Throws if all arguments are not integer or if any of the sides
-    #  are less than or equal to zero
     def __init__(self, x, y, z):
-        if isinstance(x, int) and isinstance(y, int) and isinstance(z, int):
-            if x <= 0 or y <= 0 or z <= 0:
-                raise Exception("Length of each sides must be greater than 0")
-            self.__x = x
-            self.__y = y
-            self.__z = z
-        else:
-            raise Exception("All arguments must be of type integer")
+        self.__x = x
+        self.__y = y
+        self.__z = z
 
     ## @brief Gets the values of all the sides of the triangle
     #  @return Tuple containing all the sides
@@ -72,7 +66,7 @@ class TriangleT():
             return TriType.isosceles
 
         a, b, c = self.__x ** 2, self.__y ** 2, self.__z ** 2
-        if max(a, b, c) == (a + b + c - max(a, b, c)):
+        if (a + b + c - max(a, b, c)) == max(a, b, c):
             return TriType.right
 
         if self.__y != self.__x != self.__z:

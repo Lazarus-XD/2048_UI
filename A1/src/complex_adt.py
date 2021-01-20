@@ -10,16 +10,13 @@ import math
 class ComplexT():
 
     ## @brief Contructor for ComplexT class
-    #  @details Creates a complex number based on the provided arguments
+    #  @details Creates a complex number based on the provided arguments.
+    #  Assumed the arguments provided are going to be of type float
     #  @param x Float representing the real part of the complex number
     #  @param y Float representing the imaginary part of the complex number
-    #  @throws TypeError Throws if the arguments are not float
     def __init__(self, x, y):
-        if isinstance(x, float) and isinstance(y, float):
-            self.__x = x
-            self.__y = y
-        else:
-            raise TypeError("x and y must be float")
+        self.__x = x
+        self.__y = y
 
     ## @brief Gets the real part of the complex number
     #  @return Float representing the real part
@@ -38,7 +35,6 @@ class ComplexT():
 
     ## @brief Gets the argument of the complex number
     #  @return Float representing the argument
-    #  @throws Exception Throws if both the real part and imaginary part is zero
     def get_phi(self):
         if self.__x > 0:
             return math.atan(self.__y / self.__x)
@@ -53,7 +49,7 @@ class ComplexT():
             elif self.__y < 0:
                 return - math.pi / 2
             else:
-                raise Exception("undefined answer")
+                return 0.0
 
     ## @brief Checks if the provided complex number is equal to this complex number
     #  @param complex_num ComplexT to check if it is equal to this one
@@ -94,20 +90,20 @@ class ComplexT():
 
     ## @brief Gets the reciprocal of the complex number
     #  @return ComplexT which is the reciprocal of this complex number
-    #  @throws Exception throws if the denom variable is zero
+    #  @throws Exception throws if the denom variable is less than or equal to 0
     def recip(self):
         denom = self.__x ** 2 + self.__y ** 2
-        if denom == 0:
+        if denom <= 0:
             raise Exception("The denominator should be non-zero i.e. x^2 + y^2 must be greater than 0")
         return ComplexT(self.__x / denom, - self.__y / denom)
 
     ## @brief Divides this number by the provided complex number
     #  @param complex_num ComplexT number which is used to divide this number
     #  @return ComplexT which results from the division of the numbers
-    #  @throws Exception throws if the denom varible is zero
+    #  @throws Exception throws if the denom variable is less than or equal to 0
     def div(self, complex_num):
         denom = complex_num.real() ** 2 + complex_num.imag() ** 2
-        if denom == 0:
+        if denom <= 0:
             raise Exception("The argument must be a non-zero complex number")
         x = self.__x * complex_num.real() + self.__y * complex_num.imag()
         y = self.__y * complex_num.real() - self.__x * complex_num.imag()
