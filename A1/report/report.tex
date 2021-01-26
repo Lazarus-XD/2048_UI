@@ -17,7 +17,7 @@
 \newcounter{stepnum}
 
 \title{Assignment 1 Solution}
-\author{Your Name and macid}
+\author{Rizwan Ahsan, ahsanm7}
 \date{\today}
 
 \begin {document}
@@ -30,6 +30,19 @@ version of the two classes. The design restrictions for the assignment
 are critiqued and then various related discussion questions are answered.
 
 \section{Assumptions and Exceptions} \label{AssumptAndExcept}
+The following assumtions were made:
+\begin{itemize}
+	\item The arguments provided for the constructor of \verb|ComplexT| class will always be of 
+	type float.
+	\item The arguments provided for the constructor of \verb|TriangleT| class will always be of type integer and their values will be greater than 0.
+\end{itemize}
+The following exceptions were handled:
+\begin{itemize}
+	\item The \verb|recip| method will throw an exception when the value of the denominator variable calculated from the object's real and imaginary numbers is less than or equal 
+	to 0 i.e \(x^2 + y^2 <= 0\), x being the real part and y being the imaginary part.
+	\item The \verb|div| method will throw a similar exception to \verb|recip| but in this case
+	the exception is thrown for the passed in argument's real and imaginary numbers instead.
+\end{itemize}
 
 
 \section{Test Cases and Rationale} \label{Testing}
