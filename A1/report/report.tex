@@ -46,20 +46,31 @@ The following exceptions were handled:
 
 
 \section{Test Cases and Rationale} \label{Testing}
+All of the test cases that were written covers all of the methods in \verb|ComplexT| and 
+\verb|TriangleT|. The test cases covers all branches of the code meaning all control flow statements were checked i.e all possible outcomes from if-else were covered. The part of
+the code that raised exceptions were also handled specifically. Some methods had edge cases which 
+were also handled. Otherwise, the rest of the tests that had no weird input issues were 
+handled only once, since that covered all outcomes. On some of the methods that returned
+floating value as the output, those cases were tested by rounding the output to 5 decimal places.
+By doing so the test will only return passed if the output matches the desired result upto those 5 decimal places, which in turn reduces the floating point error to some degree.
 
 
 \section{Results of Testing Partner's Code}
 
 
 \section{Critique of Given Design Specification}
+The given design specification is very good and detailed enough to create the desired outcome. 
+However, it didn't mention everything possible cases properly and left it ambigous for the developer to decide. For example, the specification didn't mention the outcome for the possiblity of giving a wrong input to any of the classes. In my opinion, the design would be more robust to say that it will take in only a specific type of input and handle the remaining inputs somehow. Also, for the \verb|tir_type| method, the design specification didn't mention what would be 
+returned as the output when the provided input corresponds to more than one type of triangle. So, 
+the less the design specification contains ambiguity regarding the functionality the more robust
+the design specification will become. This will cause the outcome to be more stable.
 
 
 \section{Answers to Questions}
 
 \begin{enumerate}[(a)]
-
-\item 
-\item ...
+	\item 
+	\item ...
 
 \end{enumerate}
 
