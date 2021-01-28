@@ -30,7 +30,7 @@ version of the two classes. The design restrictions for the assignment
 are critiqued and then various related discussion questions are answered.
 
 \section{Assumptions and Exceptions} \label{AssumptAndExcept}
-The following assumtions were made:
+The following assumptions were made:
 \begin{itemize}
 	\item The arguments provided for the constructor of \verb|ComplexT| class will always be of 
 	type float.
@@ -56,6 +56,7 @@ By doing so the test will only return passed if the output matches the desired r
 
 
 \section{Results of Testing Partner's Code}
+My tests file had a total of 26 tests. Running my test cases on my partner's files resulted in 25 passes and 1 failure. The one failed case occured in the \verb|div| method of class \verb|ComplexT|. This failure occured due to the way my test case was implemented. The test will only return true only if the output is equal to the calculated output upto 5 decimal places. But since my test case didn't consider for relative floating point error this returned as failed.
 
 
 \section{Critique of Given Design Specification}
@@ -69,8 +70,52 @@ the design specification will become. This will cause the outcome to be more sta
 \section{Answers to Questions}
 
 \begin{enumerate}[(a)]
-	\item 
-	\item ...
+	\item There aren't any mutators in \verb|ComplexT| and \verb|TriangleT|.
+
+	The methods which are selectors (getters) are:
+		\begin{itemize}
+			\item \verb|real|
+			\item \verb|imag|
+			\item \verb|get_sides|
+		\end{itemize}
+
+	\item The two possible state variables for \verb|ComplexT| are:
+		\begin{itemize}
+			\item Consider the provided input as the real and imaginary part of the complex 
+			number.
+			\item Consider the provided input and set modulus and argument as the state variables.
+		\end{itemize}
+
+		The two possible state variables for \verb|TriangleT| are:
+		\begin{itemize}
+			\item Set three different variables as the three sides of the triangle.
+			\item Setting only variable which consists all three sides in list or tuple.
+		\end{itemize}
+
+	\item No, I don't think it would make sense to add methods for greater than and less than because whether a triangle is greater or smaller than another has no use in the real world. On the other hand, figuring out if two triangles are equal can help to prove many mathematical theorems.
+
+	\item Yes, it is possible that the three integer inputs to the constructor for \verb|TriangleT| will not form a geometrically valid triangle. This will happen when the lengths of any of the two sides is not greater than the third side. In this case the contructor should initially check for the validity of the inputs and raise an error if they are invalid. By doing so the user will realise that the inputs they have provided is wrong and fix it immediately rather than finding it out later in more complex calculations.
+
+	\item Yes, having the type of the triangle as a state variable is a good idea. This will immediatly allow the user to figure out what type of triangle it is and use all the properties of that specific triangle in their code. 
+
+	\item The software qualities of performance and usability has an inverse relationship. If the performance of a product is poor then the product becomes difficult to use and vise versa. For example, if the performance of a phone is poor, then it will take a considerable amount of time for it to complete the tasks that it's user would like to do. This will result in the user not wanting to use that product again.
+
+	\item No, I don't think there are any situations where it is not necessary to fake a rational design process. Even if the entire design process is known prior to the starting of designing software there would still be some unknown edge cases that will only come out during the coding phase and testing it out. 
+
+	\item The reusability of code can affect positively towards the reliability of products. For example, it would be unwise to create something from the start if something that works already exists. Like while creating a game, creating all the physics of the game would take a long amount of energy and time but instead using game engines that already has it built-in would save not only a lot of time but increase the chances of creating a well polished game.
+
+	\item The idea of abstraction is that it contains three main properties.
+	\begin{itemize}
+		\item The concept of hiding or removing. 
+		\item The concept of generalization.
+		\item The concept of idea versus reality.
+	\end{itemize} 
+	Some examples of programming languages being abstractions built on top of hardware are:
+	\begin{itemize}
+		\item The usage of various data types to perform data abstraction.
+		\item The creation of abstract data types for example, ComplexT, TriangleT to mimic their properties.
+		\item The concept of functions is an abstraction, since the internal mechanism remains hidden to the user. A function is used to generalize a behaviour and it can be reused many times.
+	\end{itemize}
 
 \end{enumerate}
 
