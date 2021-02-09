@@ -18,7 +18,7 @@ class CircleT(Shape):
     #  @throws ValueError throws if r and m value is not greater than 0
     def __init__(self, x, y, r, m):
         if r <= 0 or m <= 0:
-            raise ValueError("r and m must be greater than 0.")
+            raise ValueError
         self.__x = x
         self.__y = y
         self.__r = r
