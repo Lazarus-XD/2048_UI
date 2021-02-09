@@ -19,6 +19,8 @@ latex/
 .coverage
 bin/
 
+**/.idea
+
 
 
 # Created by https://www.gitignore.io/api/java,latex,python,eclipse,visualstudio,visualstudiocode
