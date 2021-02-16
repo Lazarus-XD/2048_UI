@@ -1,7 +1,7 @@
 ## @file TriangleT.py
 #  @author Rizwan Ahsan, ahsanm7
-#  @brief Contains a class for working with traingles
-#  @date 11/02/2021
+#  @brief Contains a ADT for working with traingles
+#  @date 16/02/2021
 
 from Shape import Shape
 
@@ -9,7 +9,8 @@ from Shape import Shape
 ## @brief An ADT class for representing triangles
 class TriangleT(Shape):
 
-    ## @brief Constructor for the class TriangleT
+    ## @brief Constructor for the class TriangleT. Assumes the arguments
+    #         provided will be of correct type
     #  @param x x-axis of the triangle
     #  @param y y-axis of the triangle
     #  @param r radius of the triangle
@@ -23,12 +24,12 @@ class TriangleT(Shape):
         self.__s = s
         self.__m = m
 
-    ## @brief Gets the x-axis of the triangle
+    ## @brief Gets the x-axis of center of mass of the triangle
     #  @return Float representing the x-axis
     def cm_x(self):
         return self.__x
 
-    ## @brief Gets the y-axis of the triangle
+    ## @brief Gets the y-axis of center of mass of the triangle
     #  @return Float representing the y-axis
     def cm_y(self):
         return self.__y

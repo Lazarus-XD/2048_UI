@@ -1,7 +1,7 @@
 ## @file CircleT.py
 #  @author Rizwan Ahsan, ahsanm7
-#  @brief Contains a Template module for circle
-#  @date 11/02/2021
+#  @brief Contains a ADT for circle
+#  @date 16/02/2021
 
 from Shape import Shape
 
@@ -10,7 +10,8 @@ from Shape import Shape
 #  @details A circle is composed of x, y axis, radius and mass
 class CircleT(Shape):
 
-    ## @brief Constructor for the class CircleT
+    ## @brief Constructor for the class CircleT. Assumes the arguments
+    #         provided will be of correct type
     #  @param x x-axis of the circle
     #  @param y y-axis of the circle
     #  @param r radius of the circle
@@ -24,12 +25,12 @@ class CircleT(Shape):
         self.__r = r
         self.__m = m
 
-    ## @brief Gets the x-axis of the circle
+    ## @brief Gets the x-axis of center of mass of circle
     #  @return Float representing the x-axis
     def cm_x(self):
         return self.__x
 
-    ## @brief Gets the y-axis of the circle
+    ## @brief Gets the y-axis of center of mass of the circle
     #  @return Float representing the y-axis
     def cm_y(self):
         return self.__y

@@ -1,21 +1,22 @@
 ## @file Shape.py
 #  @author Rizwan Ahsan, ahsanm7
 #  @brief An interface for shape
-#  @date 11/02/2021
+#  @date 16/02/2021
 
 from abc import ABC, abstractmethod
+
 
 ## @brief Shape provides an interface for all kinds of shape
 class Shape(ABC):
 
     @abstractmethod
-    ## @brief A generic method for finding the x-axis
+    ## @brief A generic method for finding the x-axis of center of mass
     #  @return a float indicating the x-axis of the shape
     def cm_x(self):
         pass
 
     @abstractmethod
-    ## @brief A generic method for finding the y-axis
+    ## @brief A generic method for finding the y-axis of center of mass
     #  @return a float indicating the y-axis of the shape
     def cm_y(self):
         pass
