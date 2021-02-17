@@ -35,7 +35,7 @@ class BodyT(Shape):
 
     @staticmethod
     def __cm__(z, m):
-        return sum([z * i for i in m]) / sum(m)
+        return sum([z[i] * m[i] for i in range(len(m))]) / sum(m)
 
     @staticmethod
     def __mmom__(x, y, m):
