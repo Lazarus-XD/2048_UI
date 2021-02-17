@@ -14,7 +14,11 @@ from Plot import plot
 
 class TestCircleT():
 
-    c = CircleT(1.0, 10.0, 0.5, 1.0)
+    def setup_method(self, method):
+        self.c = CircleT(1.0, 10.0, 0.5, 1.0)
+
+    def teardown_method(self, method):
+        self.c = None
 
     def test_cmx(self):
         assert self.c.cm_x() == 1.0
@@ -35,7 +39,11 @@ class TestCircleT():
 
 class TestTriangleT():
 
-    t = TriangleT(1.0, -10.0, 5, 17.5)
+    def setup_method(self, method):
+        self.t = TriangleT(1.0, -10.0, 5, 17.5)
+
+    def teardown_method(self, method):
+        self.t = None
 
     def test_cmx(self):
         assert self.t.cm_x() == 1.0
@@ -56,7 +64,11 @@ class TestTriangleT():
 
 class TestBodyT():
 
-    b = BodyT([11, 9, 9, 11], [11, 11, 9, 9], [10, 10, 10, 10])
+    def setup_method(self, method):
+        self.b = BodyT([11, 9, 9, 11], [11, 11, 9, 9], [10, 10, 10, 10])
+
+    def teardown_method(self, method):
+        self.b = None
 
     def test_cmx(self):
         assert self.b.cm_x() == 10
@@ -79,3 +91,38 @@ class TestBodyT():
             BodyT([11, 9, 9, 11], [11, 11, 9, 9], [10, 10, 10, -20])
 
 
+class TestScene():
+
+    def setup_method(self, method):
+        self.t = TriangleT(1.0, -10.0, 5, 17.5)
+        self.g = 9.81
+        self.m = 1
+        self.s = Scene(self.t, self.Fx, self.Fy, 10, 20)
+
+    def teardown_method(self, method):
+        self.t1 = None
+
+    def Fx(self, t):
+        return 5 if t < 5 else 0
+
+    def Fy(self, t):
+        return -self.g * self.m if t < 3 else self.g * self.m
+
+    def test_get_shape(self):
+        assert self.s.get_shape() == self.t
+
+    def test_get_init_val(self):
+        assert self.s.get_init_velo() == (10, 20)
+
+    def test_set_init_val(self):
+        self.s.set_init_velo(0, 0)
+        assert self.s.get_init_velo() == (0, 0)
+
+    def test_set_shape(self):
+        a = CircleT(1.0, 10.0, 0.5, 1.0)
+        self.s.set_shape(a)
+        assert self.s.get_shape() == a
+
+    def test_sim(self):
+        t, wsol = self.s.sim(10, 100)
+        
