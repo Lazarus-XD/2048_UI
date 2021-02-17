@@ -30,7 +30,7 @@ class Scene():
 
     ## @brief Gets the unbalanced forces in x, y directions
     #  @return A tuple of unbalanced forces
-    def get_unbal_force(self):
+    def get_unbal_forces(self):
         return self.__fx, self.__fy
 
     ## @brief Gets the initial velocities in x, y directions
@@ -54,7 +54,7 @@ class Scene():
         self.__vy = vy
 
     ## @brief Simulates the movement of the shape with time
-    ## @return tuple of list
+    #  @return tuple of list
     def sim(self, tf, nsteps):
         t = sorted([(i * tf) / (nsteps - 1) for i in range(nsteps)])
 
