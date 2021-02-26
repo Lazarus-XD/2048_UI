@@ -19,7 +19,7 @@
 \newcounter{stepnum}
 
 \title{Assignment 2 Solution}
-\author{Your Name}
+\author{Rizwan Ahsan, ahsanm7}
 \date{\today}
 
 \begin {document}
@@ -37,13 +37,43 @@ are then critiqued and the requested discussion questions are answered.
 
 
 \section{Critique of Given Design Specification}
+The design specification for the most part is very well. All of the methods naming were consistent throughout the specification. The getter methods started with get and the setter methods started with set which made it easier to identify what the method did. THe ordering of parameters were also consisted. All of the methods had necessary exception handling and the obvious information were assumed to be inputted correctly by the programmer. The design also had the quality of essential because it didn't contain any extra unnecessary functions. CircleT.py, TriangleT.py and BodyT.py were all implemented using Shape.py as an interface which allowed to precisely implement the only required functions. The design however is not minimal. On the Scene.py, the getters and setters for the unbalanced forces and initial velocities did two task at the same time. The rest of the modules maintained minimality. The entire design can be made minimal by changing on these above methods to make them perform a single task. The design has high cohesion because all of the modules were built together to perform a single task. And in order to perform that task they were very closely related to each other. The design had low coupling between other modules. All the modules that were implemented dependent on the implementation of Shape.py, however, this module acted as interface for all the other modules. The design could be made without Shape.py but it could increase the chances of making mistakes in the process. The design was opaque meaning it had very good information hiding. All of the specification only showed what each of the modules were intended to do however, how they need to be implemented were tasked on the programmer. Overall, the design specification that was provided was very good.
 
 
 \section{Answers}
 
 \begin{enumerate}[a)]
 
-\item
+	\item Yes, I think setters and getters need to be unit tested. One a small code base it doesn't make sense to get them tested since they return a certain value or change a certain value. However, in a very big code base, where different modules have high cohesion and depends on the getters or setters then the methods need to be checked that it performs properly as intended otherwise the program will give random errors and the root cause of that errors will be difficult to find. So, writting unit tests will help mitigate these problem.
+
+	\item In order to test the functions Fx and Fy, the functions need to be defined in the unit tests. Then, a Scene object needs to be created with proper parameters for which the output of Fx and Fy are known. Then we can test the setters and getters and see that they return the correct value that was calculated prior.
+
+	\item Matplotlib has a built in testing method can be run inside of pytest. The method is called compare\_images(). This method takes in two images, 1 is the output of the graph from Plot.py and the other image is the expected graph, there is a third input which is the tolerance level. We can save the images of the plots using the savefig() function found in matplotlib and set a tolerance under which the images are equal. By doing this we can automate tests for Plot.py
+
+	\item
+
+	\item No, there is no need to have exceptions for negative coordinates because this signifies the position of the center of mass of the shape. Since the shape can move in any direction, having negative coordinates can be useful in this case. It can be used to pinpoint the specific location of the shape and can determine it's behaviour of motion.
+
+	\item In the constructor for TriangleT, there is an exception that handles the state invariant. So, whenever the condition $(s > 0 \land m > 0)$ is not met, then the program throws a ValueError and stops the code. Since, the constructor is run whenever an object of TriangleT is created, this allows that the invariant is always satisfied by the given specification.
+
+	\item \begin{lstlisting}[language=Python]
+[x**0.5 for x in range(5,20) if x%2 != 0]
+	\end{lstlisting}
+
+	\item \begin{lstlisting}[language=Python]
+def remove_upper(word):
+    output = ""
+    for c in word:
+        if c.upper() == c:
+            continue
+        output += c
+
+    return output
+		  \end{lstlisting}
+
+	\item 
+
+	\item The scenario in which a module is used by many other modules i.e Fan-in would be better in general. This is because in this case, all the other modules are dependent on the correct implementation of the parent module. So, if the dependent modules functions incorrectly then the root cause of the problem can be fixed by correcting only 1 module. 
 
 \end{enumerate}
 
@@ -91,9 +121,9 @@ are then critiqued and the requested discussion questions are answered.
 
 \newpage
 
-\section{Code for test\_All.py}
+\section{Code for test\_driver.py}
 
-\noindent \lstinputlisting{../src/test_All.py}
+\noindent \lstinputlisting{../src/test_driver.py}
 
 \newpage
 
