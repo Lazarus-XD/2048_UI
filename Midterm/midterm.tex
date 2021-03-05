@@ -469,10 +469,10 @@ and minimality.  Please be specific in your answer.
 \wss{Put your answer for each quality below.}
 
 \begin{itemize}
-\item \textbf{consistency}:
-\item \textbf{essentiality}:
-\item \textbf{generality}:
-\item \textbf{minimality}:
+\item \textbf{consistency}: The naming conventions of the methods in SetOfInt module is not consistent. The methods that returned a boolean should start with "is" before them to identitfy them properly. It is consistent in the ordering of the arguments since no method takes in  more than 1 argument. None of the methods have any exception handling, so it is consistent in that regard.
+\item \textbf{essentiality}: The module is not essential. The module has a size method and an empty method. The empty method in this case is redundant since the size method can be used to identify whether it is empty or not.
+\item \textbf{generality}: The given module is not general because it only works to create a set of integers and does procedures on that specific set. If the design considered the use of different data type instead of just integers then it could be general. This design is not open-minded meaning it does not leave any future expansion possibility. Down the line there might be a use of set of strings, but since this module only works with set of integers, a whole new module needs to be created.
+\item \textbf{minimality}: Yes, the module is minimal. It is so because none of the access routines are doing more than one task. Each access routine has their own independent service.
 \end{itemize}
 
 \end{minipage}
