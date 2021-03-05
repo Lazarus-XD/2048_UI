@@ -503,10 +503,10 @@ characterize the changes; you don't actually have to make them.)
 \wss{Put your answer below.}
 
 \begin{enumerate}[a.]
-\item
-\item
-\item
-\item (BONUS)
+\item The given specification should say it is a "Generic Template Module" instead of just "Template Module". The name of the class should be changed to SetOfT instead of SetOfInt. So, in all places that have SetOfInt should be replaced with SetOfT. The places where it has integers ($\mathbb{Z}$) and natural ($\mathbb{N}$) should be replaced with T.
+\item Since python does not type check the arguments the implementation is already generic. So, no changes needs to be made in the python implementation.
+\item In order for the type T to be valid it needs to have the relational operator equal to defined.
+\item (BONUS) We need to create a new generic interface module that will be used to check the equality of the items. Then we need to write SetOfT(T with Equality(T)) where Equality(T) is the module that checks for the equality relation for that specific type.
 \end{enumerate}
 
 \end{minipage}

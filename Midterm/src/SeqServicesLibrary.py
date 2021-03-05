@@ -8,7 +8,11 @@
 def max_val(s):
     if len(s) == 0:
         raise ValueError
-    return max(s)
+    highest = -1
+    for i in s:
+        if abs(i) > highest:
+            highest = abs(i)
+    return highest
 
 
 def count(t, s: list):
