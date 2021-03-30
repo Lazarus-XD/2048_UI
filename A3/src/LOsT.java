@@ -8,11 +8,11 @@ import src.Norm;
 
 public class LOsT implements Measures {
 
-    private String name;
-    private int n_blw;
-    private int n_mrg;
-    private int n_mts;
-    private int n_exc;
+    protected String name;
+    protected int n_blw;
+    protected int n_mrg;
+    protected int n_mts;
+    protected int n_exc;
 
     public LOsT(String topic, int nblw, int nmrg, int nmts, int nexc) {
         boolean first = (nblw < 0) || (nmrg < 0) || (nmts < 0) || (nexc < 0);
@@ -36,8 +36,8 @@ public class LOsT implements Measures {
 
     @Override
     public double[] measures(){
-        if(!Norm.getNLOs()) return new double[] {n_blw, n_mrg, n_mts, n_exc};
-        else return Services.normal(new double[] {n_blw, n_mrg, n_mts, n_exc});
+        if(!Norm.getNLOs()) return new double[]{n_blw, n_mrg, n_mts, n_exc};
+        else return Services.normal(new double[]{n_blw, n_mrg, n_mts, n_exc});
     }
 
     @Override
