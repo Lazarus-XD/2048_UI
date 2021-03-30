@@ -17,7 +17,7 @@ public class LOsT implements Measures {
     public LOsT(String topic, int nblw, int nmrg, int nmts, int nexc) {
         boolean first = (nblw < 0) || (nmrg < 0) || (nmts < 0) || (nexc < 0);
         boolean second = (nblw == 0) && (nmrg == 0) && (nmts == 0) && (nexc == 0);
-        if(first || second) throw new IllegalArgumentException();
+        if(first || second) throw new IllegalArgumentException("All the arguments cannot be 0 or either one of them cannot be less than 0");
 
         this.name = topic;
         this.n_blw = nblw;
@@ -42,11 +42,11 @@ public class LOsT implements Measures {
 
     @Override
     public double[] measures(AttributeT att){
-        throw new UnsupportedOperationException();
+        throw new UnsupportedOperationException("This operation is not supported");
     }
 
     @Override
     public double[] measures(IndicatorT ind){
-        throw new UnsupportedOperationException();
+        throw new UnsupportedOperationException("This operation is not supported");
     }
 }

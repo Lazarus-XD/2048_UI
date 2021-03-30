@@ -113,7 +113,7 @@ public class CourseT implements Measures {
 
     @Override
     public double[] measures(){
-        throw new UnsupportedOperationException();
+        throw new UnsupportedOperationException("This operation is not supported");
     }
 
     /**

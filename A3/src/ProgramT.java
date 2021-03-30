@@ -13,12 +13,12 @@ public class ProgramT extends HashSet<CourseT> implements Measures{
 
     @Override
     public double[] measures() {
-        throw new UnsupportedOperationException();
+        throw new UnsupportedOperationException("This operation is not supported");
     }
 
     @Override
     public double[] measures(IndicatorT ind) {
-        throw new UnsupportedOperationException();
+        throw new UnsupportedOperationException("This operation is not supported");
     }
 
     @Override
