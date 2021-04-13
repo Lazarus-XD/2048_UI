@@ -3,14 +3,16 @@ package src;
 public class UserInterface {
 
     public UserInterface(int[][] board) {
+        printWelcomeMessage();
+        printCommands();
         printBoard(board);
     }
 
 
     public void printWelcomeMessage() {
-        System.out.println("-------------------------------------------------");
-        System.out.println("                 Welcome to 2048                 ");
-        System.out.println("-------------------------------------------------");
+        System.out.println(" -------------------------------------------------");
+        System.out.println("|                 Welcome to 2048                 |");
+        System.out.println(" -------------------------------------------------");
     }
 
     public void printCommands() {
@@ -22,17 +24,17 @@ public class UserInterface {
     }
 
     public void printLossMessage() {
-        System.out.println("-------------------------------------------------");
-        System.out.println("                   You lost :(          ");
-        System.out.println("             Thank You For Playing !!!           ");
-        System.out.println("-------------------------------------------------");
+        System.out.println(" -------------------------------------------------");
+        System.out.println("|                   You lost :(                   |");
+        System.out.println("|             Thank You For Playing !!!           |");
+        System.out.println(" -------------------------------------------------");
     }
 
     public void printWinMessage() {
-        System.out.println("-------------------------------------------------");
-        System.out.println("                   You won :)          ");
-        System.out.println("             Thank You For Playing !!!           ");
-        System.out.println("-------------------------------------------------");
+        System.out.println(" -------------------------------------------------");
+        System.out.println("|                   You won :)                    |");
+        System.out.println("|             Thank You For Playing !!!           |");
+        System.out.println(" -------------------------------------------------");
     }
 
     public void printBoard(int[][] board) {
