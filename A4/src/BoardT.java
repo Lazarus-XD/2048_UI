@@ -7,6 +7,9 @@ public class BoardT {
     private boolean isWon;
 
     public BoardT(int size) {
+        if(size < 4) {
+            throw new IllegalArgumentException("Board must be greater than 3");
+        }
         this.board = new int[size][size];
         this.isOver = false;
         addNewNumber();

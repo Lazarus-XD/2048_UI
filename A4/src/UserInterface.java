@@ -2,10 +2,14 @@ package src;
 
 public class UserInterface {
 
-    public UserInterface(int[][] board) {
-        printWelcomeMessage();
-        printCommands();
-        printBoard(board);
+    private static UserInterface view = null;
+
+    private UserInterface() {}
+
+    public static UserInterface getInstance(){
+        if (view == null)
+            return view = new UserInterface();
+        return view;
     }
 
 
@@ -17,10 +21,10 @@ public class UserInterface {
 
     public void printCommands() {
         System.out.println("Commands to play the game:");
-        System.out.println("Up arrow: Move all tiles up");
-        System.out.println("Down arrow: Move all tiles down");
-        System.out.println("Left arrow: Move all tiles left");
-        System.out.println("Right arrow: Move all tiles right");
+        System.out.println("w: Move all tiles up");
+        System.out.println("s: Move all tiles down");
+        System.out.println("a: Move all tiles left");
+        System.out.println("d: Move all tiles right");
     }
 
     public void printLossMessage() {
