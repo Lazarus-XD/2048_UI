@@ -10,7 +10,7 @@ JCLASS = -cp "src$(SEP).$(SEP)../junit-4.5.jar"
 JC = javac
 JVM = java
 
-.PHONY: test doc expt
+.PHONY: test doc
 
 test:
 	find . -name '*.class' -exec rm -f {} \;
@@ -20,10 +20,6 @@ test:
 doc:
 	doxygen doxConfig
 	cd latex && $(MAKE)
-
-expt:
-	$(JC) $(JCLASS) $(JFLAGS) src/A3Example.java
-	$(JVM) src/A3Example
 
 clean:
 	rm -rf html
