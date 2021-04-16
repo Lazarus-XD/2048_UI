@@ -78,6 +78,8 @@ public class GameController {
      */
     public void playGame() {
         String input = "";
+        board.addNewNumber();
+        board.addNewNumber();
         displayWelcomeMessage();
         displayBoard();
         do {

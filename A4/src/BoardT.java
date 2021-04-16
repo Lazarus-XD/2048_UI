@@ -108,7 +108,7 @@ public class BoardT {
         int[][] result = new int[board.length][board.length];
         for(int i = 0; i < board.length; i++) {
             for(int j = 0; j < board.length; j++) {
-                result[i][j] = board[i][3 - j];
+                result[i][j] = board[i][board.length - 1 - j];
             }
         }
 
