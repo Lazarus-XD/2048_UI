@@ -27,8 +27,6 @@ public class BoardT {
         this.board = new int[size][size];
         this.isOver = false;
         this.changed = false;
-        addNewNumber();
-        addNewNumber();
     }
 
     /**

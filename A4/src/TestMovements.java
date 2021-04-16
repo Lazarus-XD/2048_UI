@@ -18,6 +18,8 @@ public class TestMovements {
     @Before
     public void setUp() {
         board = new BoardT(4);
+        board.addNewNumber();
+        board.addNewNumber();
     }
 
     @After

@@ -28,6 +28,8 @@ public class TestBoardT {
     @Test
     public void testAddNewNumber() {
         board.addNewNumber();
+        board.addNewNumber();
+        board.addNewNumber();
         int count = 0;
         for(int i = 0; i < board.getBoard().length; i++) {
             for(int j = 0; j < board.getBoard().length; j++) {
@@ -51,6 +53,8 @@ public class TestBoardT {
 
     @Test
     public void testTranspose() {
+        board.addNewNumber();
+        board.addNewNumber();
         int[][] t = new int[board.getBoard().length][board.getBoard().length];
         for(int i = 0; i < board.getBoard().length; i++) {
             for(int j = 0; j < board.getBoard().length; j++) {
@@ -63,6 +67,8 @@ public class TestBoardT {
 
     @Test
     public void testInverse() {
+        board.addNewNumber();
+        board.addNewNumber();
         int[][] t = new int[board.getBoard().length][board.getBoard().length];
         for(int i = 0; i < board.getBoard().length; i++) {
             for(int j = 0; j < board.getBoard().length; j++) {
@@ -78,6 +84,8 @@ public class TestBoardT {
         int count = 0;
         boolean val;
         BoardT board1 = new BoardT(4);
+        board1.addNewNumber();
+        board1.addNewNumber();
         board1.shiftCells();
         for(int i = 0; i < board1.getBoard().length; i++) {
             if((board1.getBoard()[i][0] == 2) || (board1.getBoard()[i][0] == 4))
@@ -90,6 +98,8 @@ public class TestBoardT {
     @Test
     public void testMergeCells() {
         BoardT board1 = new BoardT(4);
+        board1.addNewNumber();
+        board1.addNewNumber();
         for(int i = 0; i < 7; i++) board1.addNewNumber();
         board1.shiftCells();
         board1.mergeCells();
