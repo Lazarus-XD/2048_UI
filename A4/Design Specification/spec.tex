@@ -47,6 +47,21 @@ This Module Interface Specification (MIS) document contains modules, types and
 methods for implementing the game \textit{2048}. At the start of each game, the board is is randomly filled with two numbers either 2 or 4. The user has four moves in total to play the game. The keyboard keys w, a, s, d are used to move the numbers in the board along the top, left, down and right respectively. The game continues until the entire board is filled up with numbers and cannot merge anymore or if the user achieves the number 2048. The only way to win this game is to achieve 2048 in the board.
 
 \section{Overview of the design}
+This design applies Model-View-Controller (MVC) design pattern and Singleton design pattern. The MVC components are $BoardT, Movements$ (model module), $UserInterface$ (view module) and $GameController$ (controller module). Singleton design pattern is specified and implemented for $UserInterface$ and $GameController$.
+
+\bigskip
+
+\noindent A UML diagram is provided below for visualizing the structure of this software architecture.
+
+\includegraphics[width=0.9\textwidth]{MVC-UML.png}
+\\
+\medskip
+
+The MVC design pattern is specified and implemented in the following way: the module $BoardT$ stores the state of the game board and the status of the game. The module $Movements$ handles all the user input. A view module $UserInterface$ displays the state of the game board and game using a test-based graphics. The controller module $GameController$ is responsible for handling input actions. The design allows the board size to be anything greater than 3.
+\medskip
+
+
+For \textit{GameController} and \textit{UserInterface}, use the getInstance() method to obtain the abstract object.
 
 
 \subsection*{Likely Changes my design considers:}
@@ -146,7 +161,7 @@ new BoardT(size):
 
 \noindent inverse():
 \begin{itemize}
-    \item transition: board $:= \forall (i, j: \mathbb{N} | i, j \in [0..|board|-1] : board[i][j] = board[i][3-j])$
+    \item transition: board $:= \forall (i, j: \mathbb{N} | i, j \in [0..|board|-1] : board[i][j] = board[i][|board|-1-j])$
     \item output: None 
     \item exception: None
 \end{itemize}

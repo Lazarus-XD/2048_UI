@@ -12,7 +12,7 @@ public class BoardT {
     private int[][] board;
     private boolean isOver;
     private boolean isWon;
-    private boolean changed;
+    private boolean isChanged;
 
     /**
      * @brief constructor
@@ -26,7 +26,7 @@ public class BoardT {
         }
         this.board = new int[size][size];
         this.isOver = false;
-        this.changed = false;
+        this.isChanged = false;
     }
 
     /**
@@ -127,7 +127,7 @@ public class BoardT {
             for(int j = 0; j < board.length; j++) {
                 if(board[i][j] != 0) {
                     result[i][position] = board[i][j];
-                    if(j != position) changed = true;
+                    if(j != position) isChanged = true;
                     position++;
                 }
             }
@@ -148,17 +148,17 @@ public class BoardT {
                 if((board[i][j] == board[i][j + 1]) && board[i][j] != 0) {
                     board[i][j] = board[i][j] * 2;
                     board[i][j + 1] = 0;
-                    this.changed = true;
+                    this.isChanged = true;
                 }
             }
         }
     }
 
     /**
-     * @brief sets the changed state variable to false
+     * @brief sets the isChanged state variable to false
      */
     public void resetChanged() {
-        changed = false;
+        isChanged = false;
     }
 
     /**
@@ -186,10 +186,10 @@ public class BoardT {
     }
 
     /**
-     * @brief getter to get changed state variable
-     * @return returns the changed status of the board
+     * @brief getter to get isChanged state variable
+     * @return returns the isChanged status of the board
      */
     public boolean getIsChanged() {
-        return changed;
+        return isChanged;
     }
 }
