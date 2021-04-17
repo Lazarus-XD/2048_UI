@@ -49,22 +49,27 @@ methods for implementing the game \textit{2048}. At the start of each game, the 
 \section{Overview of the design}
 This design applies Model-View-Controller (MVC) design pattern and Singleton design pattern. The MVC components are $BoardT, Movements$ (model module), $UserInterface$ (view module) and $GameController$ (controller module). Singleton design pattern is specified and implemented for $UserInterface$ and $GameController$.
 
+\medskip
+
+The MVC design pattern is specified and implemented in the following way: the module $BoardT$ stores the state of the game board and the status of the game. The module $Movements$ handles all the user input. A view module $UserInterface$ displays the state of the game board and game using a test-based graphics. The controller module $GameController$ is responsible for handling input actions. The design allows the board size to be anything greater than 3.
+
+
+\medskip
+For \textit{GameController} and \textit{UserInterface}, use the getInstance() method to obtain the abstract object.
+
 \bigskip
 
 \noindent A UML diagram is provided below for visualizing the structure of this software architecture.
 
 \includegraphics[width=0.9\textwidth]{MVC-UML.png}
-\\
-\medskip
-
-The MVC design pattern is specified and implemented in the following way: the module $BoardT$ stores the state of the game board and the status of the game. The module $Movements$ handles all the user input. A view module $UserInterface$ displays the state of the game board and game using a test-based graphics. The controller module $GameController$ is responsible for handling input actions. The design allows the board size to be anything greater than 3.
-\medskip
-
-
-For \textit{GameController} and \textit{UserInterface}, use the getInstance() method to obtain the abstract object.
-
 
 \subsection*{Likely Changes my design considers:}
+\begin{itemize}
+    \item Data structure used for storing the game board.
+    \item Change in the size of the game board.
+    \item Change in peripheral devices for taking user input.
+    \item The way the game is visually represented.
+\end{itemize}
 
 \newpage
 
@@ -470,6 +475,28 @@ getInstance($board$, $view$):
 GameController: BoardT $\times$ UserInterface $\rightarrow$ GameController \\
 GameController($board, view$) $\equiv$ new GameController($board, view$)
 
+\newpage
+
+\section*{Critique of Design}
+
+\begin{itemize}
+    \item The controller and view modules are specified as a single abstract object because these modules are shared resources and only one instance is required during the runtime of the game. This allows any unexpected or conflicting errors to be avoided.
+    \item The design is consistent for many factors. All the functions that return a boolean value is starts with a "is", this makes it easier to identify that the function returns a boolean value. Throughout the entirety of the design we follow the camelCase naming convention.
+    \item The design is essential because we do not have any unnecessary features. There are key methods that makes the handling of user input easier - transpose(), inverse(), shiftCells() and mergeCells(). These methods are reused in all user input methods. 
+    \item The design implementation is as independent as possible. The modules $BoardT$, $Movements$ and $UserInterface$ do not interact with each other at all. Only the module $GameController$ interacts with the rest of the module and controls the game.
+    \item The design is minimal because each method has their own independent service. All methods have their own specific role and they do that exact thing, nothing else.
+    \item This design achieves high cohesion and low coupling due to the fact that it follows the MVC design pattern. This design achieves low coupling because it has 3 separate components - model ($BoardT$, $Movements$), view ($UserInterface$) and controller ($GameController$) that are independent of each other. It also achieves high cohesion because all the related components are separated into their own respective modules.
+    \item Our design is opaque because a lot of information hiding is going on. During the runtime, the board is being manipulated in various ways to achieve the functionality changes caused to the board due to user inputs.
+    \item A lot of checks were given in the design so that the programmer can avoid exceptions. In the playGame() method, while taking user input, if anything other than w, s, a or d is pressed the game still continues to ask the input again rather than breaking down.
+    \item The test cases are designed to validate the correctness of the program based on the requirements and reveal errors or unusual behaviour during the execution of the program. Every access routine has at least one test case. 
+    \item The test cases for model are in $TestBoardT.java$ and $TestMovements.java$. The controller module doesn't have any test cases because the implementation of controller's access routines uses methods from model and view.
+\end{itemize}
+
+\section*{Answers to Questions:}
+Q1: Draw a UML diagram for the modules in A3.\\\\
+\includegraphics[width=1\textwidth]{A3-UML.png}
+\newpage
+Q2: Draw a control flow graph for the convex hull algorithm.  The graph should follow the approach used by the Ghezzi et al.\ textbook.\\
 
 
 \end {document}
