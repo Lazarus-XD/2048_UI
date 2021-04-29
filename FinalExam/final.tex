@@ -195,16 +195,16 @@ by secrets hierarchy.
 \item \textbf{Is this module Hardware Hiding, Software Decision Hiding or
     Behaviour Hiding?  Why?}
 
-  - answer here
+  - It is Software Decision Hiding because this module hides what data structures and algorithms are used to find the shortest path.
 
 \item \textbf{Is this a good secret?  Why?}
 
-  - answer here
+  - No, it is not a good secret because it holds more than one secret. Normally we would want one module to contain only one secret at a time. So, this module might contain secret for the data structure and another module should contain the secret for the algorithm for finding the shortest path in a graph.
 
 \item \textbf{Does the specification for maze tracing robot require environment
     variables?  If so, which environment variables are needed?}
 
-  - answer here
+  - Yes, the specification does require environment variables. It should have an environment variable to determine the width of each cell and also should have a variable to determine the maximum size of the maze.
 
 \end{enumerate}
 
@@ -230,16 +230,19 @@ opponent.
   timeline for achieving these milestones do you propose?  You can indicate the
   time a milestone is reached by the number of months from the project's start date.}
 
-  - answer here
+  - 2nd month: Come with the documentation and the MIS for the game.\\
+  4th month: Get a working copy of the game.\\
+  6th month: Refine the documentation and MIS.\\
+  8th month: Do rigorous testing and fix errors in the game.
   
 \item \textbf{Everything in your process should be verified, including the
     verification.  How might you verify your verification?}
 
-  - answer here
+  - We can verify our verification by using Mutation Tesing. We can introduce intentional errors in our code by changing various statements, constants, changing the order of execution, etc and use our test cases to see if the same number of errors show or not. 
   
 \item \textbf{How do you propose verifying the installability of your game?}
 
-  - answer here
+  - We should try to install a fresh copy of the game in a completely new computer other than the ones being used by the 5 students. If we don't have any other computers, we can try to install it in a Virtual Machine. This will allow us to identify what additional software the game might require and verify its installability.
   
 \end{enumerate}
 
@@ -264,19 +267,22 @@ human opponents, or locally between a human and an Artificial Intelligence
     hours do you estimate that your team has available for verification related
     activities?  Please justify your answer.}
 
-  - answer here
+  - Our team will have around collectively 250 hours for verification related activities. We will have test cases for each module that we have written and verify that the tests we have written are correct or not. This will allow us enough time to find and fix any errors and refine the MIS and documentation for the code.
   
 \item \textbf{Given the estimated hours available for verification, what verification
     techniques do you recommend for your team?  Please list the techniques,
     along with the number of hours your team will spend on each technique, and
     the reason for selecting this technique.}
 
-  - answer here
+  - White Box Testing: We should write test looking at our code to cover all cases from our code. Spend around 50 hours on this.\\
+  Black Box Testing: We should write tests looking at the specification to cover any cases not considered from white box testing. Spend around 50 hours on this.\\
+  Mutation Testing: We should verify that the test cases we have written are correct or not. This will provide confidence in the code that we have written. Spend around 50 hours on this.\\
+
   
 \item \textbf{Is the oracle problem a concern for implementing your game?  Why
     or why not?  If it is a concern, how do you recommend testing your software?}
 
-  - answer here
+  - Yes, the oracle problem is a concern because there is no feasible way to test what the right answer for the case os using Artificial Intelligence should be during a chess match in a local environment. We can set some approximate values that within that treshhold approximates the oracle.
     
 \end{enumerate}
 
