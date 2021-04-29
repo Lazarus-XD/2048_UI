@@ -382,6 +382,8 @@ $\mathit{Xturn}$: $\mathbb{B}$
 \subsubsection* {State Invariant}
 
 \wss{Place your state invariant or invariants here}\\
+$|b|$ $\leq$ SIZE
+
 
 \subsubsection* {Assumptions}
 
@@ -422,6 +424,7 @@ $exc := (\mbox{InvalidPosition}(i, j) \Rightarrow \mbox{OutOfBoundsException})$
 \noindent get\_turn():
 \begin{itemize}
 \item output: \wss{Return the cellT that corresponds to the current turn}\\
+out := ($Xturn \Rightarrow X|true \Rightarrow O$)
 
 \item exception: none
 \end{itemize}
@@ -442,6 +445,7 @@ $exc := (\mbox{InvalidPosition}(i, j) \Rightarrow \mbox{OutOfBoundsException})$
 \noindent is\_game\_over():
 \begin{itemize}
 \item output: \wss{Returns true if X or O wins, or if there are no more moves remaining}\\
+out := ($c: cellT, b: boardT|horizontal\_win(c,b) \vee vertical\_win(c,b) \vee diagonal\_win(c,b) \Rightarrow true$)
 
 \item exception: none
 \end{itemize}
@@ -463,7 +467,7 @@ InvalidPosition$(i, j) \equiv \neg ( ( 0 \leq i < \mbox{SIZE} ) \wedge ( 0 \leq 
 \wss{For the current board return the number of occurrences of the cellT
   argument}
 ~\newline
-
+count$(c) \equiv +(i : \mathbb{N} | c : i)$
 
 ~\newline
 
@@ -484,6 +488,7 @@ vertical\_win$(c, b) \equiv \exists (j : \mathbb{N} | 0 \leq j < \mbox{SIZE} : b
 \wss{Returns true if one of the diagonals for the board has all of the entries
   equal to cellT}
 ~\newline
+diagonal\_win$(c, b) \equiv \exists (b[0, 0] = b[1, 1] = b[2, 2] = c | b[0, 2] = b[1, 1] = b[2, 0] = c)$
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
