@@ -9,6 +9,8 @@ public class GameBoard {
     public static final int ROWS = 4;
     public static final int COLS = 4;
 
+    private BoardT boardT;
+
     private final int startingTiles = 2;
     private Tile[][] board;
     private boolean dead;
@@ -19,16 +21,20 @@ public class GameBoard {
 
     private static int SPACING = 10;
     public static int BOARD_WIDTH = (COLS + 1) * SPACING + COLS * Tile.WIDTH;
-    public static int BOARD_HEIGHT = (ROWS + 1) + SPACING + ROWS * Tile.HEIGHT;
+    public static int BOARD_HEIGHT = (ROWS + 1) * SPACING + ROWS * Tile.HEIGHT;
+
+    private boolean hasStarted;
 
     public GameBoard(int x, int y) {
         this.x = x;
         this.y = y;
-        board = new Tile[ROWS][COLS];
-        gameBoard = new BufferedImage(BOARD_WIDTH, BOARD_HEIGHT, BufferedImage.TYPE_INT_ARGB);
-        finalBoard = new BufferedImage(BOARD_WIDTH, BOARD_HEIGHT, BufferedImage.TYPE_INT_ARGB);
+        boardT = new BoardT(ROWS);
+        board = boardT.getBoard();
+        gameBoard = new BufferedImage(BOARD_WIDTH, BOARD_HEIGHT, BufferedImage.TYPE_INT_RGB);
+        finalBoard = new BufferedImage(BOARD_WIDTH, BOARD_HEIGHT, BufferedImage.TYPE_INT_RGB);
 
         createBoardImage();
+        start();
     }
 
     private void createBoardImage() {
@@ -46,11 +52,31 @@ public class GameBoard {
         }
     }
 
+    private void start() {
+        for(int i = 0; i < startingTiles; i++) {
+            boardT.addNewNumber();
+        }
+    }
+
+    public int getTileX(int col) {
+        return SPACING + col * Tile.WIDTH + col * SPACING;
+    }
+
+    public int getTileY(int row) {
+        return SPACING + row * Tile.HEIGHT + row * SPACING;
+    }
+
     public void render(Graphics2D g) {
         Graphics2D g2d = (Graphics2D) finalBoard.getGraphics();
         g2d.drawImage(gameBoard,0,0,null);
 
-        //draw tiles
+        for(int row = 0; row < ROWS; row++) {
+            for(int col = 0; col < COLS; col++) {
+                Tile current = board[row][col];
+                if(current == null) continue;
+                current.render(g2d);
+            }
+        }
 
         g.drawImage(finalBoard,x,y,null);
         g2d.dispose();
@@ -58,20 +84,80 @@ public class GameBoard {
 
     public void update() {
         checkKeys();
+
+        for(int row = 0; row < ROWS; row++) {
+            for(int col = 0; col < COLS; col++) {
+                Tile current = board[row][col];
+                if(current == null) continue;
+                current.update();
+                resetPosition(current, row, col);
+                if(current.getValue() == 2048) {
+                    won = true;
+                }
+            }
+        }
+    }
+
+    private void resetPosition(Tile current, int row, int col) {
+        if(current == null) return;
+
+        int x = getTileX(col);
+        int y = getTileY(row);
+
+        int distX = current.getX() - x;
+        int distY = current.getY() - y;
+
+        if(Math.abs(distX) < Tile.SLIDE_SPEED) {
+            current.setX(current.getX() - distX);
+        }
+
+        if(Math.abs(distY) < Tile.SLIDE_SPEED) {
+            current.setY(current.getY() - distY);
+        }
+
+        if(distX < 0) {
+            current.setX(current.getX() + Tile.SLIDE_SPEED);
+        }
+
+        if(distY < 0) {
+            current.setY(current.getY() + Tile.SLIDE_SPEED);
+        }
+
+        if(distX > 0) {
+            current.setX(current.getX() - Tile.SLIDE_SPEED);
+        }
+
+        if(distY > 0) {
+            current.setY(current.getY() - Tile.SLIDE_SPEED);
+        }
+    }
+
+    private void turnCheck() {
+        if(!boardT.getIsOver() && boardT.getIsChanged()) boardT.addNewNumber();
+        boardT.resetChanged();
+        boardT.updateStatus();
     }
 
     private void checkKeys() {
         if(KeyBoard.typed(KeyEvent.VK_LEFT)) {
-            //move tiles left
+            Movements.moveLeft(boardT);
+            turnCheck();
+            if(!hasStarted) hasStarted = true;
         }
         if(KeyBoard.typed(KeyEvent.VK_RIGHT)) {
-            //move tiles right
+            Movements.moveRight(boardT);
+            turnCheck();
+            if(!hasStarted) hasStarted = true;
         }
         if(KeyBoard.typed(KeyEvent.VK_UP)) {
-            //move tiles down
+            Movements.moveUp(boardT);
+            turnCheck();
+            if(!hasStarted) hasStarted = true;
         }
         if(KeyBoard.typed(KeyEvent.VK_DOWN)) {
-            //move tiles down
+            Movements.moveDown(boardT);
+            turnCheck();
+            if(!hasStarted) hasStarted = true;
         }
     }
 

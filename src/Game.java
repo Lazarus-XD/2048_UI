@@ -13,7 +13,7 @@ public class Game extends JPanel implements KeyListener, Runnable {
     public static final Font main = new Font("Bebas Neue Regular", Font.PLAIN, 28);
     private Thread game;
     private boolean running;
-    private BufferedImage image = new BufferedImage(WIDTH,HEIGHT,BufferedImage.TYPE_INT_ARGB);
+    private BufferedImage image = new BufferedImage(WIDTH,HEIGHT,BufferedImage.TYPE_INT_RGB);
     private GameBoard board;
 
     private long startTime;
@@ -29,8 +29,7 @@ public class Game extends JPanel implements KeyListener, Runnable {
     }
 
     private void update() {
-        if(KeyBoard.pressed[KeyEvent.VK_SPACE]) System.out.println("hit space");
-        if(KeyBoard.typed(KeyEvent.VK_RIGHT)) System.out.println("hit right");
+        board.update();
         KeyBoard.update();
     }
 

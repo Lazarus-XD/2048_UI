@@ -1,22 +1,13 @@
 package src;
 
-import src.pictures.NumSquare;
 
 import javax.swing.*;
 import java.awt.*;
+import java.util.Arrays;
 
 public class Main {
 
     public static void main(String[] args) {
-//        GUI frame = new GUI();
-
-//        Frame frame = new JFrame();
-//        JPanel panel = new JPanel();
-//        panel.add(new NumSquare(16));
-//        frame.add(panel);
-//        frame.pack();
-//        frame.setVisible(true);
-
         Game game = new Game();
 
         JFrame window = new JFrame("2048");
@@ -28,5 +19,14 @@ public class Main {
         window.setVisible(true);
 
         game.start();
+
+//        BoardT b = new BoardT(4);
+//        Tile[][] t = b.getBoard();
+//        System.out.println(Arrays.deepToString(t));
+
+//        BoardT b = new BoardT(4);
+//        UserInterface ui = UserInterface.getInstance();
+//        GameController g = GameController.getInstance(b, ui);
+//        g.playGame();
     }
 }

@@ -9,10 +9,12 @@ package src;
 
 public class BoardT {
 
-    private int[][] board;
+//    private int[][] board;
+    private Tile[][] board;
     private boolean isOver;
     private boolean isWon;
     private boolean isChanged;
+    private static int SPACING = 10;
 
     /**
      * @brief constructor
@@ -24,7 +26,7 @@ public class BoardT {
         if(size < 4) {
             throw new IllegalArgumentException("Board must be greater than 3");
         }
-        this.board = new int[size][size];
+        this.board = new Tile[size][size];
         this.isOver = false;
         this.isChanged = false;
     }
@@ -37,16 +39,25 @@ public class BoardT {
         int row = (int) (Math.random() * board.length);
         int col = (int) (Math.random() * board.length);
 
-        while(board[row][col] != 0) {
+        while(board[row][col] != null) {
             row = (int) (Math.random() * board.length);
             col = (int) (Math.random() * board.length);
         }
 
+
         if(Math.random() > 0.1) {
-            board[row][col] = 2;
+            board[row][col] = new Tile(2, getTileX(col), getTileY(row));
         } else {
-            board[row][col] = 4;
+            board[row][col] = new Tile(4, getTileX(col), getTileY(row));
         }
+    }
+
+    public int getTileX(int col) {
+        return SPACING + col * Tile.WIDTH + col * SPACING;
+    }
+
+    public int getTileY(int row) {
+        return SPACING + row * Tile.HEIGHT + row * SPACING;
     }
 
     /**
@@ -54,30 +65,34 @@ public class BoardT {
      * @details checks if the game is complete or not and updates accordingly
      */
     public void updateStatus() {
-        for (int[] ints : board) {
+        for (Tile[] ints : board) {
             for (int j = 0; j < board.length; j++) {
-                if (ints[j] == 2048) {
+                if(ints[j] == null) return;
+
+                if (ints[j].getValue() == 2048) {
                     isOver = true;
                     isWon = true;
                     return;
                 }
-                if (ints[j] == 0) return;
             }
         }
 
         for(int i = 0; i < board.length - 1; i++) {
             for(int j = 0; j < board.length - 1; j++) {
-                if((board[i][j] == board[i + 1][j]) || (board[i][j] == board[i][j + 1]))
+                if(board[i][j] == null || board[i+1][j] == null || board[i][j+1] == null) continue;
+                if((board[i][j].getValue() == board[i + 1][j].getValue()) || (board[i][j].getValue() == board[i][j + 1].getValue()))
                     return;
             }
         }
 
         for(int i = 0; i < board.length - 1; i++) {
-            if(board[i][board.length - 1] == board[i + 1][board.length - 1]) return;
+            if(board[i][board.length - 1] == null || board[i+1][board.length - 1] == null) continue;
+            if(board[i][board.length - 1].getValue() == board[i + 1][board.length - 1].getValue()) return;
         }
 
         for(int j = 0; j < board.length - 1; j++) {
-            if(board[board.length - 1][j] == board[board.length - 1][j + 1]) return;
+            if(board[board.length - 1][j] == null || board[board.length - 1][j+1] == null) continue;
+            if(board[board.length - 1][j].getValue() == board[board.length - 1][j + 1].getValue()) return;
         }
 
         isOver = true;
@@ -89,7 +104,7 @@ public class BoardT {
      * @details interchanges the rows and columns of the board
      */
     public void transpose() {
-        int[][] result = new int[board.length][board.length];
+        Tile[][] result = new Tile[board.length][board.length];
         for(int i = 0; i < board.length; i++) {
             for(int j = 0; j < board.length; j++) {
                 result[i][j] = board[j][i];
@@ -105,7 +120,7 @@ public class BoardT {
      * @brief inverses the board matrix
      */
     public void inverse() {
-        int[][] result = new int[board.length][board.length];
+        Tile[][] result = new Tile[board.length][board.length];
         for(int i = 0; i < board.length; i++) {
             for(int j = 0; j < board.length; j++) {
                 result[i][j] = board[i][board.length - 1 - j];
@@ -121,11 +136,11 @@ public class BoardT {
      * @brief shifts all numbers in the board to their left most index
      */
     public void shiftCells() {
-        int[][] result = new int[board.length][board.length];
+        Tile[][] result = new Tile[board.length][board.length];
         for(int i = 0; i < board.length; i++) {
             int position = 0;
             for(int j = 0; j < board.length; j++) {
-                if(board[i][j] != 0) {
+                if(board[i][j] != null) {
                     result[i][position] = board[i][j];
                     if(j != position) isChanged = true;
                     position++;
@@ -145,9 +160,12 @@ public class BoardT {
     public void mergeCells() {
         for(int i = 0; i < board.length; i++) {
             for(int j = 0; j < board.length - 1; j++) {
-                if((board[i][j] == board[i][j + 1]) && board[i][j] != 0) {
-                    board[i][j] = board[i][j] * 2;
-                    board[i][j + 1] = 0;
+
+                if(board[i][j] == null || board[i][j + 1] == null) continue;
+
+                if((board[i][j].getValue() == board[i][j + 1].getValue()) && board[i][j].getValue() != 0) {
+                    board[i][j].setValue(board[i][j].getValue() * 2);
+                    board[i][j + 1] = null;
                     this.isChanged = true;
                 }
             }
@@ -165,7 +183,7 @@ public class BoardT {
      * @brief getter to get board state variable
      * @return returns the board
      */
-    public int[][] getBoard() {
+    public Tile[][] getBoard() {
         return board;
     }
 
