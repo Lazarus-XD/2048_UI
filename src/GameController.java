@@ -20,11 +20,15 @@ public class GameController extends JPanel implements KeyListener, Runnable {
     public static final int HEIGHT = 500;
 
     public static final Font main = new Font("MV Boli", Font.PLAIN, 28);
-    private Thread game;
     private boolean running;
-    private BufferedImage image = new BufferedImage(WIDTH,HEIGHT,BufferedImage.TYPE_INT_RGB);
-    private UserInterface board;
+    private final BufferedImage image = new BufferedImage(WIDTH,HEIGHT,BufferedImage.TYPE_INT_RGB);
+    private final UserInterface board;
 
+
+    /**
+     * @brief constructor
+     * @details renders the GUI, listens for keyboard inputs and functions as base for running the game.
+     */
     public GameController() {
         setFocusable(true);
         setPreferredSize(new Dimension(WIDTH, HEIGHT));
@@ -38,6 +42,9 @@ public class GameController extends JPanel implements KeyListener, Runnable {
         KeyBoard.update();
     }
 
+    /**
+     * @brief renders the entire GUI
+     */
     private void render() {
         Graphics2D g = (Graphics2D) image.getGraphics();
 
@@ -121,7 +128,7 @@ public class GameController extends JPanel implements KeyListener, Runnable {
     public synchronized void start() {
         if(running) return;
         running = true;
-        game = new Thread(this, "game");
+        Thread game = new Thread(this, "game");
         game.start();
     }
 

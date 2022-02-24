@@ -1,7 +1,7 @@
 /**
  * @file: BoardT.java
  * @Author: Rizwan Ahsan, ahsanm7
- * @Date: April 16, 2021
+ * @Date: February 23, 2022
  * @Description: module that stores the state and status of the game
  */
 
@@ -9,11 +9,11 @@ package src;
 
 public class BoardT {
 
-    private Tile[][] board;
+    private final Tile[][] board;
     private boolean isOver;
     private boolean isWon;
     private boolean isChanged;
-    private static int SPACING = 10;
+    private static final int SPACING = 10;
     private int score = 0;
 
     /**
@@ -52,10 +52,18 @@ public class BoardT {
         }
     }
 
+    /**
+     * @brief Finds the proper x-axis value on the game board
+     * @return returns the int value of the x-axis for the tile in the GUI
+     */
     public int getTileX(int col) {
         return SPACING + col * Tile.WIDTH + col * SPACING;
     }
 
+    /**
+     * @brief Finds the proper y-axis value on the game board
+     * @return returns the int value of the y-axis for the tile in the GUI
+     */
     public int getTileY(int row) {
         return SPACING + row * Tile.HEIGHT + row * SPACING;
     }
@@ -212,6 +220,10 @@ public class BoardT {
         return isChanged;
     }
 
+    /**
+     * @brief getter to get getScore state variable
+     * @return returns the score of the game
+     */
     public int getScore() {
         return score;
     }

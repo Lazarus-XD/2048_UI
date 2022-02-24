@@ -19,12 +19,17 @@ public class Tile {
     public static final int ARC_HEIGHT = 25;
 
     private int value;
-    private BufferedImage tileImage;
-    private Color background;
-    private Color text;
-    private Font font;
+    private final BufferedImage tileImage;
     private int x, y;
 
+
+    /**
+     * @brief constructor
+     * @details generates the individual tiles on the board
+     * @param value integer to represent the value of the tile
+     * @param x integer to represent the x-axis of the tile
+     * @param y integer to represent the y-axis of the tile
+     */
     public Tile(int value, int x, int y) {
         this.value = value;
         this.x = x;
@@ -33,8 +38,13 @@ public class Tile {
         drawImage();
     }
 
+    /**
+     * @brief draws the tiles on the game board
+     */
     private void drawImage() {
         Graphics2D g = (Graphics2D) tileImage.getGraphics();
+        Color background;
+        Color text;
         switch (value) {
             case 2 -> {
                 background = new Color(236, 226, 197);
@@ -94,6 +104,7 @@ public class Tile {
 
         g.setColor(text);
 
+        Font font;
         if(value <= 64) {
             font = GameController.main.deriveFont(36f);
         } else {
@@ -108,35 +119,66 @@ public class Tile {
         g.dispose();
     }
 
+    /**
+     * @brief updates the screen when one or more tiles are moved
+     */
     public void update() {
 
     }
 
+    /**
+     * @brief renders the tiles on the screen
+     * @param g Graphics2D object
+     */
     public void render(Graphics2D g) {
         g.drawImage(tileImage,x,y,null);
     }
 
+    /**
+     * @brief Getter to get the value of the tile
+     * @return return the value of the tile
+     */
     public int getValue() {
         return value;
     }
 
+    /**
+     * @brief Setter to set the value of the tile
+     * @param value integer value for the updated tile number
+     */
     public void setValue(int value) {
         this.value = value;
         drawImage();
     }
 
+    /**
+     * @brief Getter to get the x-axis value of the tile
+     * @return return the value of the x-axis
+     */
     public int getX() {
         return x;
     }
 
+    /**
+     * @brief Getter to get the y-axis value of the tile
+     * @return return the value of the y-axis
+     */
     public int getY() {
         return y;
     }
 
+    /**
+     * @brief Setter to set the x-axis value of the tile
+     * @param x int value of x-axis
+     */
     public void setX(int x) {
         this.x = x;
     }
 
+    /**
+     * @brief Setter to set the y-axis value of the tile
+     * @param y int value of y-axis
+     */
     public void setY(int y) {
         this.y = y;
     }

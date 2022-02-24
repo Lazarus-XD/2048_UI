@@ -16,6 +16,9 @@ public class KeyBoard {
 
     private KeyBoard() {}
 
+    /**
+     * @brief updates the array prev with the pressed values
+     */
     public static void update() {
         for(int i = 0; i < 4; i++) {
             if(i == 0) prev[KeyEvent.VK_LEFT] = pressed[KeyEvent.VK_LEFT];
@@ -24,14 +27,28 @@ public class KeyBoard {
             if(i == 3) prev[KeyEvent.VK_DOWN] = pressed[KeyEvent.VK_DOWN];
         }
     }
+
+    /**
+     * @brief Sets the key pressed value to true on the pressed array
+     * @param e KeyEvent to represent the value of key pressed
+     */
     public static void keyPressed(KeyEvent e) {
         pressed[e.getKeyCode()] = true;
     }
 
+    /**
+     * @brief Sets the key released value to false on the pressed array
+     * @param e KeyEvent to represent the value of key released
+     */
     public static void keyReleased(KeyEvent e) {
         pressed[e.getKeyCode()] = false;
     }
 
+    /**
+     * @brief Checks if the keyEvent was pressed and removed to allow for single output
+     * @param keyEvent integer to represent the value of the keyEvent
+     * @return returns a boolean value
+     */
     public static boolean typed(int keyEvent) {
         return !pressed[keyEvent] && prev[keyEvent];
     }
