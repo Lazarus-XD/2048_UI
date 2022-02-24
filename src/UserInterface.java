@@ -47,7 +47,8 @@ public class UserInterface {
      */
     public UserInterface(int x, int y) {
         try {
-            saveDataPath = UserInterface.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath();
+//            saveDataPath = UserInterface.class.getProtectionDomain().getCodeSource().getLocation().toURI().getPath();
+            saveDataPath = System.getProperty("user.dir");
         } catch (Exception e) {
             e.printStackTrace();
         }
