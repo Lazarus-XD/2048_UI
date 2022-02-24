@@ -15,8 +15,10 @@ import java.awt.image.BufferedImage;
 
 public class GameController extends JPanel implements KeyListener, Runnable {
 
+    //change height and width to compensate size increase of board
     public static final int WIDTH = 400;
     public static final int HEIGHT = 500;
+
     public static final Font main = new Font("MV Boli", Font.PLAIN, 28);
     private Thread game;
     private boolean running;
@@ -38,7 +40,9 @@ public class GameController extends JPanel implements KeyListener, Runnable {
 
     private void render() {
         Graphics2D g = (Graphics2D) image.getGraphics();
-        g.setColor(Color.white);
+
+        //background color
+        g.setColor(new Color(129,98,0));
         g.fillRect(0,0,WIDTH,HEIGHT);
 
         //render the board

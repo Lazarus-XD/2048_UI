@@ -1,3 +1,10 @@
+/**
+ * @file: DrawUtils.java
+ * @Author: Rizwan Ahsan, ahsanm7
+ * @Date: April 16, 2021
+ * @Description: DrawUtils module is used to calculate message height and width on the GUI
+ */
+
 package src;
 
 import java.awt.*;

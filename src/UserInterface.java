@@ -14,6 +14,7 @@ import java.io.*;
 
 public class UserInterface {
 
+    //change rows and cols to increase game size
     public static final int ROWS = 4;
     public static final int COLS = 4;
 
@@ -145,14 +146,14 @@ public class UserInterface {
         g.drawImage(finalBoard,x,y,null);
         g2d.dispose();
 
-        g.setColor(new Color(182,161,96));
+        g.setColor(Color.WHITE);
         g.setFont(new Font("Consolas", Font.BOLD, 65));
         g.drawString("2048", 20, 75);
 
-        g.setColor(Color.darkGray);
+        g.setColor(Color.WHITE);
         g.setFont(scoreFont);
         g.drawString("Current: " + boardT.getScore(), GameController.WIDTH - DrawUtils.getMessageWidth("Best:" + highScore, scoreFont, g) - 65, 40);
-        g.setColor(Color.darkGray);
+        g.setColor(Color.WHITE);
         g.drawString("Best: " + highScore, GameController.WIDTH - DrawUtils.getMessageWidth("Best:" + highScore, scoreFont, g) - 60, 80);
     }
 
