@@ -23,6 +23,8 @@ bin/
 *.iml
 **/out
 
+SaveFile
+
 
 
 # Created by https://www.gitignore.io/api/java,latex,python,eclipse,visualstudio,visualstudiocode
