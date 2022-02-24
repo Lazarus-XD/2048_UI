@@ -1,3 +1,10 @@
+/**
+ * @file: Tile.java
+ * @Author: Rizwan Ahsan, ahsanm7
+ * @Date: February 23, 2022
+ * @Description: Tile module handles the tiles generated on the GUI
+ */
+
 package src;
 
 import java.awt.*;
@@ -8,8 +15,8 @@ public class Tile {
     public static final int WIDTH = 80;
     public static final int HEIGHT = 80;
     public static final int SLIDE_SPEED = 20;
-    public static final int ARC_WIDTH = 15;
-    public static final int ARC_HEIGHT = 15;
+    public static final int ARC_WIDTH = 25;
+    public static final int ARC_HEIGHT = 25;
 
     private int value;
     private BufferedImage tileImage;
@@ -29,53 +36,54 @@ public class Tile {
     private void drawImage() {
         Graphics2D g = (Graphics2D) tileImage.getGraphics();
         switch (value) {
-            case 2:
-                background = new Color(0x9e9e9);
+            case 2 -> {
+                background = new Color(236, 226, 197);
                 text = new Color(0x000000);
-                break;
-            case 4:
-                background = new Color(0x6daab);
+            }
+            case 4 -> {
+                background = new Color(255, 198, 88);
                 text = new Color(0x000000);
-                break;
-            case 8:
+            }
+            case 8 -> {
                 background = new Color(0xf79d3d);
                 text = new Color(0xffffff);
-                break;
-            case 16:
+            }
+            case 16 -> {
                 background = new Color(0xf28007);
                 text = new Color(0xffffff);
-                break;
-            case 32:
+            }
+            case 32 -> {
                 background = new Color(0xf55e3b);
                 text = new Color(0xffffff);
-                break;
-            case 64:
+            }
+            case 64 -> {
                 background = new Color(0xff1212);
                 text = new Color(0xffffff);
-                break;
-            case 128:
+            }
+            case 128 -> {
                 background = new Color(0xe9de84);
                 text = new Color(0xffffff);
-                break;
-            case 256:
+            }
+            case 256 -> {
                 background = new Color(0xf6e873);
                 text = new Color(0xffffff);
-                break;
-            case 512:
+            }
+            case 512 -> {
                 background = new Color(0xf5e455);
                 text = new Color(0xffffff);
-                break;
-            case 1024:
+            }
+            case 1024 -> {
                 background = new Color(0xf7e12c);
                 text = new Color(0xffffff);
-                break;
-            case 2048:
+            }
+            case 2048 -> {
                 background = new Color(0xffe400);
                 text = new Color(0xffffff);
-                break;
-            default:
+            }
+            default -> {
                 background = Color.BLACK;
                 text = Color.WHITE;
+            }
         }
 
         g.setColor(new Color(0,0,0,0));
@@ -87,9 +95,9 @@ public class Tile {
         g.setColor(text);
 
         if(value <= 64) {
-            font = Game.main.deriveFont(36f);
+            font = GameController.main.deriveFont(36f);
         } else {
-          font = Game.main;
+          font = GameController.main;
         }
         g.setFont(font);
 

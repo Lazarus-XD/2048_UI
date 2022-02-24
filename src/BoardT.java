@@ -9,12 +9,12 @@ package src;
 
 public class BoardT {
 
-//    private int[][] board;
     private Tile[][] board;
     private boolean isOver;
     private boolean isWon;
     private boolean isChanged;
     private static int SPACING = 10;
+    private int score = 0;
 
     /**
      * @brief constructor
@@ -167,6 +167,7 @@ public class BoardT {
                     board[i][j].setValue(board[i][j].getValue() * 2);
                     board[i][j + 1] = null;
                     this.isChanged = true;
+                    score += board[i][j].getValue();
                 }
             }
         }
@@ -209,5 +210,9 @@ public class BoardT {
      */
     public boolean getIsChanged() {
         return isChanged;
+    }
+
+    public int getScore() {
+        return score;
     }
 }

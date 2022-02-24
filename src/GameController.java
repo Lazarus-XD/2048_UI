@@ -1,117 +1,129 @@
-///**
-// * @file: GameController.java
-// * @Author: Rizwan Ahsan, ahsanm7
-// * @Date: April 16, 2021
-// * @Description: controller module that handles inputs and links model and view module
-// */
-//
-//package src;
-//
-//import java.util.Scanner;
-//
-//public class GameController {
-//
-//    private BoardT board;
-//    private UserInterface view;
-//    private static GameController controller = null;
-//
-//    private Scanner keyPress = new Scanner(System.in);
-//
-//    /**
-//     * @brief constructor
-//     * @param board - model module (BoardT)
-//     * @param view - view module (UserInterface)
-//     */
-//    private GameController(BoardT board, UserInterface view) {
-//        this.board = board;
-//        this.view = view;
-//    }
-//
-//    /**
-//     * @brief public static method for obtaining a single instance
-//     * @param board - model module (BoardT)
-//     * @param view - view module (UserInterface)
-//     * @return the single GameController object
-//     */
-//    public static GameController getInstance(BoardT board, UserInterface view) {
-//        if (controller == null)
-//            controller = new GameController(board, view);
-//
-//        return controller;
-//    }
-//
-//    /**
-//     * @brief updates the view module to display a welcome message
-//     */
-//    public void displayWelcomeMessage() {
-//        view.printWelcomeMessage();
-//        view.printCommands();
-//    }
-//
-//    /**
-//     * @brief updates the view module to display the board
-//     */
-//    public void displayBoard() {
-//        view.printBoard(board.getBoard());
-//    }
-//
-//    /**
-//     * @brief updates the view module to display the game ending message
-//     */
-//    public void displayEnding() {
-//        if(board.getIsWon()) view.printWinMessage();
-//        else view.printLossMessage();
-//    }
-//
-//    /**
-//     * @brief gets the input from the user
-//     * @return the input
-//     */
-//    public String readInput(){
-//        String input = "";
-//        input = keyPress.nextLine();
-//        return input;
-//    }
-//
-//    /**
-//     * @brief runs the game
-//     */
-//    public void playGame() {
-//        String input = "";
-//        board.addNewNumber();
-//        board.addNewNumber();
-//        displayWelcomeMessage();
-//        displayBoard();
-//        do {
-//            while (true) {
-//                System.out.print("Press the command: ");
-//                input = readInput();
-//                if (input.equals("w")) {
-//                    Movements.moveUp(board);
-//                    break;
-//                }
-//                if (input.equals("s")) {
-//                    Movements.moveDown(board);
-//                    break;
-//                }
-//                if (input.equals("a")) {
-//                    Movements.moveLeft(board);
-//                    break;
-//                }
-//                if (input.equals("d")) {
-//                    Movements.moveRight(board);
-//                    break;
-//                } else {
-//                    System.out.println("Wrong command pressed!");
-//                }
-//
-//            }
-//            if(!board.getIsOver() && board.getIsChanged()) board.addNewNumber();
-//            displayBoard();
-//            board.resetChanged();
-//            board.updateStatus();
-//        } while (!board.getIsOver());
-//
-//        displayEnding();
-//    }
-//}
+/**
+ * @file: GameController.java
+ * @Author: Rizwan Ahsan, ahsanm7
+ * @Date: February 23, 2022
+ * @Description: controller module that handles inputs and links model and view module
+ */
+
+package src;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.KeyEvent;
+import java.awt.event.KeyListener;
+import java.awt.image.BufferedImage;
+
+public class GameController extends JPanel implements KeyListener, Runnable {
+
+    public static final int WIDTH = 400;
+    public static final int HEIGHT = 500;
+    public static final Font main = new Font("MV Boli", Font.PLAIN, 28);
+    private Thread game;
+    private boolean running;
+    private BufferedImage image = new BufferedImage(WIDTH,HEIGHT,BufferedImage.TYPE_INT_RGB);
+    private UserInterface board;
+
+    public GameController() {
+        setFocusable(true);
+        setPreferredSize(new Dimension(WIDTH, HEIGHT));
+        addKeyListener(this);
+
+        board = new UserInterface(WIDTH/2 - UserInterface.BOARD_WIDTH/2, HEIGHT - UserInterface.BOARD_HEIGHT - 10);
+    }
+
+    private void update() {
+        board.update();
+        KeyBoard.update();
+    }
+
+    private void render() {
+        Graphics2D g = (Graphics2D) image.getGraphics();
+        g.setColor(Color.white);
+        g.fillRect(0,0,WIDTH,HEIGHT);
+
+        //render the board
+        board.render(g);
+        g.dispose();
+
+        Graphics2D g2d = (Graphics2D) getGraphics();
+        g2d.drawImage(image,0,0,null);
+        g2d.dispose();
+    }
+
+    @Override
+    public void keyTyped(KeyEvent e) {
+    }
+
+    @Override
+    public void keyPressed(KeyEvent e) {
+        KeyBoard.keyPressed(e);
+    }
+
+    @Override
+    public void keyReleased(KeyEvent e) {
+        KeyBoard.keyReleased(e);
+    }
+
+    @Override
+    public void run() {
+        int fps = 0;
+        int updates = 0;
+        long fpsTimer = System.currentTimeMillis();
+        double nsPerUpdate = 1000000000.0 / 60;
+
+        //last update in nanoseconds
+        double then = System.nanoTime();
+        double unprocessed = 0;
+
+        //update queue
+        while(running) {
+
+            boolean shouldRender = false;
+            double now = System.nanoTime();
+            unprocessed += (now - then) / nsPerUpdate;
+            then = now;
+
+            while (unprocessed >= 1) {
+                updates++;
+                update();
+                unprocessed--;
+                shouldRender = true;
+            }
+
+            //render
+            if (shouldRender) {
+                fps++;
+                render();
+                shouldRender = false;
+            } else {
+                try {
+                    Thread.sleep(1);
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        }
+
+        //FPS Timer
+        if(System.currentTimeMillis() - fpsTimer > 1000) {
+            System.out.printf("%d fps %d updates", fps, updates);
+            System.out.println();
+            fps = 0;
+            updates = 0;
+            fpsTimer += 1000;
+        }
+    }
+
+    public synchronized void start() {
+        if(running) return;
+        running = true;
+        game = new Thread(this, "game");
+        game.start();
+    }
+
+    public synchronized void stop() {
+        if(!running) return;
+        running = false;
+        System.exit(0);
+    }
+}

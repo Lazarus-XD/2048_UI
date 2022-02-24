@@ -1,3 +1,10 @@
+/**
+ * @file: KeyBoard.java
+ * @Author: Rizwan Ahsan, ahsanm7
+ * @Date: February 23, 2022
+ * @Description: KeyBoard module handles all the keyboard inputs
+ */
+
 package src;
 
 import java.awt.event.KeyEvent;
